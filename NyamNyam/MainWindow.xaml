@@ -1,0 +1,21 @@
+﻿<Window x:Class="NyamNyam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NyamNyam"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="900" MinHeight="550" MinWidth="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="8*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+            <TextBlock Text="Dishes" FontSize="15" Name="Dishes" MouseLeftButtonDown="Dishes_MouseLeftButtonDown" Foreground="Blue"></TextBlock>
+            <TextBlock Text="Ingredients" FontSize="15" Name="Ingredients" MouseLeftButtonDown="Ingredients_MouseLeftButtonDown" Foreground="Blue"></TextBlock>
+            <TextBlock Text="Orders" FontSize="15" Name="Orders"  MouseLeftButtonDown="Orders_MouseLeftButtonDown"  Foreground="Blue"></TextBlock>
+        </StackPanel>
+        <Frame Grid.Column="1" Name="MyFrame" NavigationUIVisibility="Hidden"></Frame>
+    </Grid>
+</Window>

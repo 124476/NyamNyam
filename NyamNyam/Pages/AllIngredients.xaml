@@ -1,0 +1,48 @@
+﻿<Page x:Class="NyamNyam.Pages.AllIngredients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NyamNyam.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AllIngredients">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView Name="ListOneRechepts" Grid.Column="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Width="175" Grid.Column="0" Margin="10,0,0,0">
+                            <TextBlock Text="{Binding Ingredient.Name}" FontSize="17"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Kol}" FontSize="17" Margin="0,0,10,0"></TextBlock>
+                                <TextBlock Text="unit" FontSize="17"></TextBlock>
+                            </StackPanel>
+                            <TextBlock Text="{Binding MainInit.Name}" FontSize="17"></TextBlock>
+                            <TextBlock Text="Delete" FontSize="17" Foreground="red" MouseUp="Del_MouseUp"  Name="Del"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="1" Width="200">
+            <TextBlock Text="Ingredient:" FontSize="17"></TextBlock>
+            <ComboBox x:Name="ComboIngredients" FontSize="17" DisplayMemberPath="Name"></ComboBox>
+            <TextBlock Text="Количество:" FontSize="17"></TextBlock>
+            <TextBox x:Name="KolOneRec" FontSize="17"></TextBox>
+            <TextBlock Text="Main Init:" FontSize="17"></TextBlock>
+            <ComboBox x:Name="ComboMainInits" FontSize="17" DisplayMemberPath="Name"></ComboBox>
+            <Button x:Name="AddBtn" FontSize="17" Click="AddBtn_Click"  Content="Add" Margin="0,10,0,0"></Button>
+            <Button x:Name="Back" FontSize="17" Click="Back_Click"  Content="Back" Margin="0,10,0,0"></Button>
+        </StackPanel>
+    </Grid>
+</Page>

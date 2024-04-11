@@ -1,0 +1,62 @@
+﻿<Page x:Class="NyamNyam.Pages.OknoIngredients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NyamNyam.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OknoIngredients"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="List of Ingredients" FontSize="25" Margin="10,10,10,10"></TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Total avalible ingredients for the amount:" FontSize="17" Margin="10,3,10,3"></TextBlock>
+                <TextBlock Name="TotalSum" FontSize="17" Margin="10,3,10,3"></TextBlock>
+            </StackPanel>
+            <ScrollViewer Height="250">
+                <ListView x:Name="ListIngredints" d:ItemsSource="{d:SampleData ItemCount=2}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" Width="750"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="LightGray">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Width="175" Grid.Column="0" Margin="10,0,0,0">
+                                    <TextBlock Text="{Binding Name}" FontSize="17"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Price: " FontSize="17" Margin="1,1,1,1"></TextBlock>
+                                        <TextBlock Text="{Binding Sum}" FontSize="17" Margin="1,1,1,1"></TextBlock>
+                                        <TextBlock Text="$" FontSize="17" Margin="1,1,1,1"></TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Text="Delete" FontSize="17" Foreground="red" MouseUp="Del_MouseUp"  Name="Del"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Width="175">
+                                    <StackPanel HorizontalAlignment="Right" Margin="0,0,10,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Kol}" FontSize="17" Margin="1,1,4,1" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="unit" FontSize="17" Margin="1,1,10,1" VerticalAlignment="Center"></TextBlock>
+                                            <StackPanel>
+                                                <Button x:Name="UpKol" FontSize="17" Content="+" Width="30" Height="30" Click="UpKol_Click" Margin="0,0,0,5"></Button>
+                                                <Button x:Name="DownKol" FontSize="17" Content="-" Width="30" Height="30" Click="DownKol_Click"></Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            <Button x:Name="New" Content="New ingredint" FontSize="17" Click="New_Click" Width="200" Margin="0,10,0,0"></Button>
+        </StackPanel>
+    </Grid>
+</Page>

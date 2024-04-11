@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="935dd039ccd147618b21f7e705d89495" Name="Diagram1">
+        <EntityTypeShape EntityType="NyamDatabaseModel.Bludo" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.Category" Width="1.5" PointX="1.5" PointY="10.125" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.Ingredient" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.MainInit" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.OneRechept" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.Rechept" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.Zakaz" Width="1.5" PointX="1.75" PointY="12.75" />
+        <EntityTypeShape EntityType="NyamDatabaseModel.ZakazAndBludo" Width="1.5" PointX="4" PointY="8.875" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_Bludo_Category" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_Rechept_Bludo1" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_ZakazAndBludo_Bludo" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_Ingredient_MainInit" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_OneRechept_Ingredient" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_OneRechept_MainInit" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_OneRechept_Rechept" />
+        <AssociationConnector Association="NyamDatabaseModel.FK_ZakazAndBludo_Zakaz" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
