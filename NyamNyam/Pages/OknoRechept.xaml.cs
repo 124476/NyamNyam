@@ -78,5 +78,10 @@ namespace NyamNyam.Pages
         {
             NavigationService.Navigate(new NewBludo(contextBludo));
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Refrash();
+        }
     }
 }

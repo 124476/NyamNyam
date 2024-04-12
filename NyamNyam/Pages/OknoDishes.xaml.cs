@@ -104,5 +104,10 @@ namespace NyamNyam.Pages
         {
             NavigationService.Navigate(new NewBludo(new Bludo()));
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Refrash();
+        }
     }
 }

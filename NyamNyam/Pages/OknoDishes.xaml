@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:NyamNyam.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OknoDishes">
+      Title="OknoDishes"
+      Loaded="Page_Loaded">
 
     <Grid>
         <StackPanel>
