@@ -13,17 +13,21 @@ namespace NyamNyam.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ZakazAndBludo
+    public partial class Client
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Client()
+        {
+            this.Zakaz = new HashSet<Zakaz>();
+        }
+    
         public int Id { get; set; }
-        public Nullable<int> BludoId { get; set; }
-        public Nullable<int> ZakazId { get; set; }
-        public Nullable<System.DateTime> DateStart { get; set; }
-        public Nullable<System.DateTime> DateEnd { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
         [JsonIgnore]
-        public virtual Bludo Bludo { get; set; }
-        [JsonIgnore]
-        public virtual Zakaz Zakaz { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zakaz> Zakaz { get; set; }
     }
 }

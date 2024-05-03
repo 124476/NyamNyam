@@ -25,6 +25,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="150" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="Ingredient">
           <Key>
             <PropertyRef Name="Id" />
@@ -77,11 +86,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="150" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="150" />
-          <Property Name="Email" Type="nvarchar" MaxLength="150" />
           <Property Name="Date" Type="date" />
           <Property Name="Adress" Type="nvarchar" MaxLength="250" />
+          <Property Name="ClientId" Type="int" />
         </EntityType>
         <EntityType Name="ZakazAndBludo">
           <Key>
@@ -90,6 +97,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BludoId" Type="int" />
           <Property Name="ZakazId" Type="int" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="DateEnd" Type="datetime" />
         </EntityType>
         <Association Name="FK_Bludo_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -163,6 +172,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Zakaz_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ZakazAndBludo_Bludo">
           <End Role="Bludo" Type="Self.Bludo" Multiplicity="0..1" />
           <End Role="ZakazAndBludo" Type="Self.ZakazAndBludo" Multiplicity="*" />
@@ -190,6 +211,7 @@
         <EntityContainer Name="Хранилище NyamDatabaseModelContainer">
           <EntitySet Name="Bludo" EntityType="Self.Bludo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainInit" EntityType="Self.MainInit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OneRechept" EntityType="Self.OneRechept" Schema="dbo" store:Type="Tables" />
@@ -221,6 +243,10 @@
             <End Role="Bludo" EntitySet="Bludo" />
             <End Role="Rechept" EntitySet="Rechept" />
           </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Client" Association="Self.FK_Zakaz_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
           <AssociationSet Name="FK_ZakazAndBludo_Bludo" Association="Self.FK_ZakazAndBludo_Bludo">
             <End Role="Bludo" EntitySet="Bludo" />
             <End Role="ZakazAndBludo" EntitySet="ZakazAndBludo" />
@@ -237,6 +263,7 @@
         <EntityContainer Name="NyamDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bludo" EntityType="NyamDatabaseModel.Bludo" />
           <EntitySet Name="Category" EntityType="NyamDatabaseModel.Category" />
+          <EntitySet Name="Client" EntityType="NyamDatabaseModel.Client" />
           <EntitySet Name="Ingredient" EntityType="NyamDatabaseModel.Ingredient" />
           <EntitySet Name="MainInit" EntityType="NyamDatabaseModel.MainInit" />
           <EntitySet Name="OneRechept" EntityType="NyamDatabaseModel.OneRechept" />
@@ -255,6 +282,10 @@
           <AssociationSet Name="FK_ZakazAndBludo_Bludo" Association="NyamDatabaseModel.FK_ZakazAndBludo_Bludo">
             <End Role="Bludo" EntitySet="Bludo" />
             <End Role="ZakazAndBludo" EntitySet="ZakazAndBludo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Client" Association="NyamDatabaseModel.FK_Zakaz_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
           </AssociationSet>
           <AssociationSet Name="FK_Ingredient_MainInit" Association="NyamDatabaseModel.FK_Ingredient_MainInit">
             <End Role="MainInit" EntitySet="MainInit" />
@@ -300,6 +331,16 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bludo" Relationship="NyamDatabaseModel.FK_Bludo_Category" FromRole="Category" ToRole="Bludo" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zakaz" Relationship="NyamDatabaseModel.FK_Zakaz_Client" FromRole="Client" ToRole="Zakaz" />
         </EntityType>
         <EntityType Name="Ingredient">
           <Key>
@@ -362,11 +403,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="Adress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="NyamDatabaseModel.FK_Zakaz_Client" FromRole="Zakaz" ToRole="Client" />
           <NavigationProperty Name="ZakazAndBludo" Relationship="NyamDatabaseModel.FK_ZakazAndBludo_Zakaz" FromRole="Zakaz" ToRole="ZakazAndBludo" />
         </EntityType>
         <EntityType Name="ZakazAndBludo">
@@ -376,6 +416,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BludoId" Type="Int32" />
           <Property Name="ZakazId" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="DateEnd" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Bludo" Relationship="NyamDatabaseModel.FK_ZakazAndBludo_Bludo" FromRole="ZakazAndBludo" ToRole="Bludo" />
           <NavigationProperty Name="Zakaz" Relationship="NyamDatabaseModel.FK_ZakazAndBludo_Zakaz" FromRole="ZakazAndBludo" ToRole="Zakaz" />
         </EntityType>
@@ -412,6 +454,18 @@
             </Principal>
             <Dependent Role="ZakazAndBludo">
               <PropertyRef Name="BludoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Client">
+          <End Type="NyamDatabaseModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="NyamDatabaseModel.Zakaz" Role="Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -503,6 +557,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="NyamDatabaseModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Ingredient">
             <EntityTypeMapping TypeName="NyamDatabaseModel.Ingredient">
               <MappingFragment StoreEntitySet="Ingredient">
@@ -558,11 +622,9 @@
           <EntitySetMapping Name="Zakaz">
             <EntityTypeMapping TypeName="NyamDatabaseModel.Zakaz">
               <MappingFragment StoreEntitySet="Zakaz">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -570,6 +632,8 @@
           <EntitySetMapping Name="ZakazAndBludo">
             <EntityTypeMapping TypeName="NyamDatabaseModel.ZakazAndBludo">
               <MappingFragment StoreEntitySet="ZakazAndBludo">
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
                 <ScalarProperty Name="ZakazId" ColumnName="ZakazId" />
                 <ScalarProperty Name="BludoId" ColumnName="BludoId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

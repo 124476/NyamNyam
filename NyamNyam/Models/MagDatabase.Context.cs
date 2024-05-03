@@ -27,6 +27,7 @@ namespace NyamNyam.Models
     
         public virtual DbSet<Bludo> Bludo { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Ingredient> Ingredient { get; set; }
         public virtual DbSet<MainInit> MainInit { get; set; }
         public virtual DbSet<OneRechept> OneRechept { get; set; }

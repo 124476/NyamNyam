@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -116,6 +119,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>MagDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>MagDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ingredient.cs">
       <DependentUpon>MagDatabase.tt</DependentUpon>
     </Compile>
@@ -141,7 +147,6 @@
       <DependentUpon>MagDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Partials\Bludo.cs" />
-    <Compile Include="Models\Partials\Ingredient.cs" />
     <Compile Include="Models\Partials\OneRechept.cs" />
     <Compile Include="Models\Rechept.cs">
       <DependentUpon>MagDatabase.tt</DependentUpon>
